@@ -14,6 +14,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var textGhost: UITextField!
     @IBOutlet weak var imageTitle: UILabel!
     @IBOutlet weak var imageView: UIImageView!
+    var imagePicker = UIImagePickerController()
     var newMedia: Bool?
     
     override func viewDidLoad() {
@@ -52,7 +53,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func useCamera(_ sender: AnyObject) {
-        
+        /*
         if UIImagePickerController.isSourceTypeAvailable(
             UIImagePickerControllerSourceType.camera) {
             
@@ -70,7 +71,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         } else {
             imageTitle.text = "Unable to access camera"
             
+        }*/
+        
+        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
+            
+            imagePicker.delegate = self
+            imagePicker.sourceType = .savedPhotosAlbum;
+            imagePicker.allowsEditing = false
+            
+            self.present(imagePicker, animated: true, completion: nil)
         }
+        
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
